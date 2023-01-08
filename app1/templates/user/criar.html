@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div class="form-group row">
+        <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label"> {{ field.label }}</label>
+        <div class="col-sm-10">
+            {{ field }}
+        </div>
+    </div>
+    {% if field.errors %}
+    {% for error in field.errors %}
+    <div class="offset-sm-2 col-sm-10">
+        <span class="badge badge-pill badge-danger">{{ error }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+    <div class="row justify-content-end">
+        <div class="col-md-2">
+            <button class="btn btn-primary" type="submit" name="acao" value="salvar">Salvar</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
